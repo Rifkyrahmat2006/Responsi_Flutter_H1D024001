@@ -9,7 +9,7 @@ class LocalStorageService {
   final SharedPreferences _preferences;
   static const _favoritesKey = 'favorite_locations';
   static const _selectedKey = 'selected_location';
-  static const _darkModeKey = 'dark_mode';
+
   static const _recentKey = 'recent_locations';
 
   List<LocationModel> getFavorites() {
@@ -44,11 +44,6 @@ class LocalStorageService {
 
   Future<void> saveSelected(LocationModel location) =>
       _preferences.setString(_selectedKey, jsonEncode(location.toJson()));
-
-  bool getDarkMode() => _preferences.getBool(_darkModeKey) ?? false;
-
-  Future<void> saveDarkMode(bool enabled) =>
-      _preferences.setBool(_darkModeKey, enabled);
 
   List<LocationModel> getRecentLocations() {
     try {

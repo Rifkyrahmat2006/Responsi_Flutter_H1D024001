@@ -11,14 +11,7 @@ import 'search_location_screen.dart';
 
 /// Home / Weather Screen.
 class WeatherScreen extends StatelessWidget {
-  const WeatherScreen({
-    super.key,
-    required this.darkMode,
-    required this.onToggleTheme,
-  });
-
-  final bool darkMode;
-  final VoidCallback onToggleTheme;
+  const WeatherScreen({super.key});
 
   @override
   Widget build(BuildContext context) {
@@ -27,13 +20,6 @@ class WeatherScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(vm.location?.name ?? 'Cuaca'),
         actions: [
-          IconButton(
-            tooltip: darkMode ? 'Gunakan mode terang' : 'Gunakan mode gelap',
-            onPressed: onToggleTheme,
-            icon: Icon(
-              darkMode ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
-            ),
-          ),
           IconButton(
             tooltip: 'Cari lokasi',
             onPressed: () => Navigator.push(

@@ -31,9 +31,9 @@ Ikon, suhu, dan kondisi cuaca ditampilkan dengan kontras tinggi agar informasi u
 
 ### 2. Mode Terang dan Gelap
 
-Pengguna dapat mengubah tampilan aplikasi melalui tombol tema pada Home Screen. Preferensi tema disimpan menggunakan `SharedPreferences`, sehingga pilihan pengguna tetap digunakan ketika aplikasi dibuka kembali.
+Tampilan aplikasi otomatis mengikuti tema sistem operasi melalui `ThemeMode.system`. Saat tema perangkat berubah, Flutter memilih `ThemeData` terang atau gelap secara otomatis.
 
-Implementasi menggunakan `ThemeMode` Flutter dan dua `ThemeData` terpusat:
+Implementasi menggunakan dua `ThemeData` terpusat:
 
 - `appTheme()` untuk mode terang.
 - `appDarkTheme()` untuk mode gelap.
