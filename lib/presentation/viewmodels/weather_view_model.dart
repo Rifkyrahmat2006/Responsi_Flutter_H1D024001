@@ -16,12 +16,14 @@ class WeatherViewModel extends ChangeNotifier {
   LocationModel? location;
   WeatherModel? weather;
   List<LocationModel> favorites = [];
+  List<LocationModel> recentLocations = [];
   bool loading = false;
   String? error;
 
   Future<void> initialize() async {
     // Data lokal (favorit & lokasi terakhir) dimuat kembali saat aplikasi dibuka.
     favorites = _storage.getFavorites();
+    recentLocations = _storage.getRecentLocations();
     location =
         _storage.getSelected() ??
         const LocationModel(
@@ -61,6 +63,8 @@ class WeatherViewModel extends ChangeNotifier {
     location = value;
     weather = null; // jangan tampilkan cuaca kota sebelumnya
     await _storage.saveSelected(value);
+    await _storage.saveRecentLocation(value);
+    recentLocations = _storage.getRecentLocations();
     await loadWeather();
   }
 

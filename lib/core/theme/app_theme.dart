@@ -17,3 +17,22 @@ ThemeData appTheme() => ThemeData(
     border: OutlineInputBorder(),
   ),
 );
+
+ThemeData appDarkTheme() => ThemeData(
+  useMaterial3: true,
+  brightness: Brightness.dark,
+  colorScheme: ColorScheme.fromSeed(
+    seedColor: const Color(0xff64b5f6),
+    brightness: Brightness.dark,
+  ),
+  appBarTheme: const AppBarTheme(centerTitle: true),
+  textTheme: const TextTheme(
+    displaySmall: TextStyle(fontWeight: FontWeight.w600),
+    titleLarge: TextStyle(fontWeight: FontWeight.w600),
+    titleMedium: TextStyle(fontWeight: FontWeight.w600),
+    bodyMedium: TextStyle(height: 1.4),
+  ),
+  inputDecorationTheme: const InputDecorationTheme(
+    border: OutlineInputBorder(),
+  ),
+);

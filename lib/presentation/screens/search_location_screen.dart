@@ -67,6 +67,10 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
                     ),
                   ),
                   const SizedBox(height: 12),
+                  if (search.results.isEmpty &&
+                      !search.loading &&
+                      search.error == null)
+                    _buildSavedLocations(weather),
                   Expanded(child: _buildResults(search, weather)),
                   if (weather.favorites.isNotEmpty) ...[
                     const Divider(),
@@ -109,6 +113,35 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
     );
   }
 
+  Widget _buildSavedLocations(WeatherViewModel weather) {
+    final locations = weather.recentLocations;
+    if (locations.isEmpty) return const SizedBox.shrink();
+    return Column(
+      crossAxisAlignment: CrossAxisAlignment.start,
+      children: [
+        Text(
+          'Pencarian terakhir',
+          style: Theme.of(context).textTheme.titleMedium,
+        ),
+        const SizedBox(height: 8),
+        SizedBox(
+          height: 44,
+          child: ListView.separated(
+            scrollDirection: Axis.horizontal,
+            itemCount: locations.length,
+            separatorBuilder: (_, _) => const SizedBox(width: 8),
+            itemBuilder: (_, index) => ActionChip(
+              avatar: const Icon(Icons.history, size: 18),
+              label: Text(locations[index].name),
+              onPressed: () => _select(weather, locations[index]),
+            ),
+          ),
+        ),
+        const SizedBox(height: 12),
+      ],
+    );
+  }
+
   Widget _buildResults(SearchViewModel search, WeatherViewModel weather) {
     if (search.loading) return const LoadingView();
     if (search.error != null) {
@@ -125,7 +158,8 @@ class _SearchLocationScreenState extends State<SearchLocationScreen> {
     }
     if (search.results.isEmpty) {
       return EmptyView(
-        message: 'Kota "${search.query}" tidak ditemukan. Coba kata kunci lain.',
+        message:
+            'Kota "${search.query}" tidak ditemukan. Coba kata kunci lain.',
         icon: Icons.location_off_outlined,
       );
     }

@@ -63,10 +63,18 @@ lalu ViewModel memperbarui state dan `notifyListeners()` sehingga View yang mema
 
 ## 4. Local Storage
 
-`LocalStorageService` (SharedPreferences) menyimpan **daftar lokasi favorit** dan **lokasi terakhir dipilih** dalam bentuk JSON.
+`LocalStorageService` (SharedPreferences) menyimpan **daftar lokasi favorit**, **lokasi terakhir dipilih** dalam bentuk JSON, dan preferensi mode gelap.
 Data dimuat kembali di `WeatherViewModel.initialize()` saat aplikasi dibuka.
 
-## 5. Kesesuaian dengan Ketentuan Responsi
+## 5. Pengembangan Desain
+
+- Hero card memakai gradient berbeda berdasarkan `weather_code`, tanpa asset eksternal.
+- Mode terang/gelap memakai `ThemeMode` Flutter dan tersimpan lewat `SharedPreferences`.
+- Forecast harian menampilkan nama hari, suhu maksimum/minimum, dan progress peluang hujan.
+
+Pengembangan ini hanya memperkaya presentasi data yang sudah diwajibkan. Tidak ada backend, chart kompleks, navigation tambahan, atau data cuaca hardcoded.
+
+## 6. Kesesuaian dengan Ketentuan Responsi
 
 | Ketentuan | Status | Lokasi |
 | --- | --- | --- |

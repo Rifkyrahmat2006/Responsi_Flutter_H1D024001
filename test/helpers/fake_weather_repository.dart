@@ -4,10 +4,7 @@ import 'package:responsi_flutter/domain/repositories/weather_repository.dart';
 
 /// Repository palsu untuk pengujian (tanpa akses jaringan).
 class FakeWeatherRepository implements WeatherRepository {
-  FakeWeatherRepository({
-    this.locations = const [],
-    this.error,
-  });
+  FakeWeatherRepository({this.locations = const [], this.error});
 
   final List<LocationModel> locations;
   final Object? error;

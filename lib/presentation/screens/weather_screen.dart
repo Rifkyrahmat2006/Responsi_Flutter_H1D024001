@@ -4,13 +4,21 @@ import 'package:provider/provider.dart';
 import '../viewmodels/weather_view_model.dart';
 import '../widgets/current_weather_card.dart';
 import '../widgets/daily_forecast_list.dart';
+import '../widgets/hourly_forecast_list.dart';
 import '../widgets/state_views.dart';
 import '../widgets/weather_detail_tile.dart';
 import 'search_location_screen.dart';
 
 /// Home / Weather Screen.
 class WeatherScreen extends StatelessWidget {
-  const WeatherScreen({super.key});
+  const WeatherScreen({
+    super.key,
+    required this.darkMode,
+    required this.onToggleTheme,
+  });
+
+  final bool darkMode;
+  final VoidCallback onToggleTheme;
 
   @override
   Widget build(BuildContext context) {
@@ -19,6 +27,13 @@ class WeatherScreen extends StatelessWidget {
       appBar: AppBar(
         title: Text(vm.location?.name ?? 'Cuaca'),
         actions: [
+          IconButton(
+            tooltip: darkMode ? 'Gunakan mode terang' : 'Gunakan mode gelap',
+            onPressed: onToggleTheme,
+            icon: Icon(
+              darkMode ? Icons.light_mode_outlined : Icons.dark_mode_outlined,
+            ),
+          ),
           IconButton(
             tooltip: 'Cari lokasi',
             onPressed: () => Navigator.push(
@@ -117,6 +132,13 @@ class WeatherScreen extends StatelessWidget {
               ],
               CurrentWeatherCard(weather: weather),
               const SizedBox(height: 12),
+              Text(
+                'Prakiraan per jam',
+                style: Theme.of(context).textTheme.titleLarge,
+              ),
+              const SizedBox(height: 8),
+              HourlyForecastList(hours: weather.hourly),
+              const SizedBox(height: 20),
               LayoutBuilder(
                 builder: (context, constraints) {
                   const spacing = 8.0;

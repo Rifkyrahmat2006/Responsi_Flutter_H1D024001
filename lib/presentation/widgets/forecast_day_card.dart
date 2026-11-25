@@ -44,7 +44,19 @@ class ForecastDayCard extends StatelessWidget {
                   '${day.maxTemperature.toStringAsFixed(0)}° / ${day.minTemperature.toStringAsFixed(0)}°',
                   style: textTheme.titleSmall,
                 ),
-                Text('Hujan ${day.rainProbability}%', style: textTheme.bodySmall),
+                Text(
+                  'Hujan ${day.rainProbability}%',
+                  style: textTheme.bodySmall,
+                ),
+                const SizedBox(height: 5),
+                SizedBox(
+                  width: 92,
+                  child: LinearProgressIndicator(
+                    value: day.rainProbability.clamp(0, 100) / 100,
+                    minHeight: 5,
+                    borderRadius: BorderRadius.circular(8),
+                  ),
+                ),
               ],
             ),
           ],

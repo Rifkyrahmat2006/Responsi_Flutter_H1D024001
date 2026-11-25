@@ -25,5 +25,4 @@ const _monthNames = [
 
 String dayName(DateTime date) => _dayNames[date.weekday - 1];
 
-String shortDate(DateTime date) =>
-    '${date.day} ${_monthNames[date.month - 1]}';
+String shortDate(DateTime date) => '${date.day} ${_monthNames[date.month - 1]}';

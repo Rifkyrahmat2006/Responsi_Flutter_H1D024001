@@ -14,6 +14,53 @@ diambil langsung dari **Open-Meteo REST API** (bukan data statis/hardcoded).
 - Penyimpanan lokal (**SharedPreferences**): lokasi favorit dan lokasi terakhir dipilih, dimuat kembali saat aplikasi dibuka.
 - Penanganan kondisi **loading**, **data kosong**, dan **error** (dengan tombol coba lagi).
 
+## Pengembangan Fitur Tambahan
+
+Fitur berikut dikembangkan di luar kebutuhan minimum responsi untuk meningkatkan kualitas visual dan pengalaman penggunaan, tanpa menambah backend, chart kompleks, atau navigation tambahan.
+
+### 1. Hero Card Dinamis
+
+Kartu cuaca utama menggunakan gradient yang berubah berdasarkan `weather_code` dari Open-Meteo:
+
+- Cerah menggunakan warna biru terang.
+- Berawan menggunakan warna abu-biru.
+- Hujan menggunakan warna biru.
+- Badai menggunakan warna biru gelap.
+
+Ikon, suhu, dan kondisi cuaca ditampilkan dengan kontras tinggi agar informasi utama mudah dibaca.
+
+### 2. Mode Terang dan Gelap
+
+Pengguna dapat mengubah tampilan aplikasi melalui tombol tema pada Home Screen. Preferensi tema disimpan menggunakan `SharedPreferences`, sehingga pilihan pengguna tetap digunakan ketika aplikasi dibuka kembali.
+
+Implementasi menggunakan `ThemeMode` Flutter dan dua `ThemeData` terpusat:
+
+- `appTheme()` untuk mode terang.
+- `appDarkTheme()` untuk mode gelap.
+
+### 3. Forecast Harian yang Lebih Informatif
+
+Forecast harian diperjelas dengan beberapa informasi tambahan:
+
+- Nama hari, seperti `Hari ini`, `Besok`, dan nama hari berikutnya.
+- Suhu maksimum dan minimum.
+- Ikon dan label kondisi cuaca.
+- Progress bar peluang hujan.
+
+Semua nilai tetap berasal dari data `daily` Open-Meteo, bukan data statis.
+
+### 4. Forecast Per Jam
+
+Home menampilkan forecast per jam untuk 24 jam ke depan dari field `hourly` Open-Meteo. Setiap kartu menampilkan waktu, suhu, ikon kondisi cuaca, dan peluang hujan.
+
+### 5. Pencarian Terakhir
+
+Lima lokasi terakhir yang dipilih disimpan dalam `SharedPreferences`. Lokasi tampil sebagai chip pada Search Screen dan dapat dipilih ulang tanpa mengetik nama kota.
+
+### 6. Lokasi Terakhir
+
+Lokasi terakhir yang dipilih otomatis disimpan dan dimuat saat aplikasi dibuka kembali. Aplikasi langsung mengambil data cuaca terbaru dari API untuk lokasi tersebut.
+
 ## Teknologi
 
 | Kebutuhan | Implementasi |
