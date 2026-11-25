@@ -30,7 +30,7 @@ Semua request menggunakan **HTTP GET** (`package:http`) di `data/services/open_m
 | Fungsi | Endpoint | Parameter utama |
 | --- | --- | --- |
 | Cari kota | `https://geocoding-api.open-meteo.com/v1/search` | `name`, `count`, `language`, `format` |
-| Cuaca | `https://api.open-meteo.com/v1/forecast` | `latitude`, `longitude`, `current`, `daily`, `timezone=auto` |
+| Cuaca | `https://api.open-meteo.com/v1/forecast` | `latitude`, `longitude`, `current`, `hourly`, `daily`, `forecast_hours=24`, `forecast_days=7`, `timezone=auto` |
 
 Field yang dipakai:
 
@@ -44,6 +44,9 @@ Field yang dipakai:
 | Kecepatan angin | `current.wind_speed_10m` |
 | Suhu maks/min harian | `daily.temperature_2m_max` / `daily.temperature_2m_min` |
 | Peluang hujan maks | `daily.precipitation_probability_max` |
+| Suhu per jam | `hourly.temperature_2m` |
+| Peluang hujan per jam | `hourly.precipitation_probability` |
+| Kode kondisi per jam | `hourly.weather_code` |
 
 Alur pengolahan: respons JSON → `jsonDecode` → `LocationModel.fromJson` / `WeatherModel.fromJson` → ditampilkan di UI.
 Kegagalan jaringan, timeout (15 detik), status HTTP non-2xx, dan format JSON tidak valid dipetakan ke `ApiException`
@@ -63,7 +66,7 @@ lalu ViewModel memperbarui state dan `notifyListeners()` sehingga View yang mema
 
 ## 4. Local Storage
 
-`LocalStorageService` (SharedPreferences) menyimpan **daftar lokasi favorit** dan **lokasi terakhir dipilih** dalam bentuk JSON.
+`LocalStorageService` (SharedPreferences) menyimpan **daftar lokasi favorit**, **lima lokasi terakhir yang dipilih**, dan **lokasi terakhir dipilih** dalam bentuk JSON.
 Data dimuat kembali di `WeatherViewModel.initialize()` saat aplikasi dibuka.
 
 ## 5. Pengembangan Desain
@@ -71,6 +74,9 @@ Data dimuat kembali di `WeatherViewModel.initialize()` saat aplikasi dibuka.
 - Hero card memakai gradient berbeda berdasarkan `weather_code`, tanpa asset eksternal.
 - Mode terang/gelap mengikuti tema sistem melalui `ThemeMode.system` dan dua `ThemeData` terpusat.
 - Forecast harian menampilkan nama hari, suhu maksimum/minimum, dan progress peluang hujan.
+- Forecast per jam menampilkan 24 jam data suhu, ikon kondisi, dan peluang hujan.
+- Search Screen menampilkan lima pencarian terakhir sebagai chip yang dapat dipilih ulang.
+- Lokasi terakhir otomatis dimuat saat aplikasi dibuka lalu cuaca terbaru diambil dari API.
 
 Pengembangan ini hanya memperkaya presentasi data yang sudah diwajibkan. Tidak ada backend, chart kompleks, navigation tambahan, atau data cuaca hardcoded.
 
@@ -80,7 +86,7 @@ Pengembangan ini hanya memperkaya presentasi data yang sudah diwajibkan. Tidak a
 | --- | --- | --- |
 | Flutter + Dart, Stateful/Stateless | ✅ | seluruh `lib/` |
 | Flutter Widgets, Material Design, Theme, Typography | ✅ | `core/theme/app_theme.dart`, `presentation/` |
-| UI responsif | ✅ | `LayoutBuilder` + `Wrap`, `ConstrainedBox`, daftar prakiraan vertikal |
+| UI responsif | ✅ | `LayoutBuilder` + `Wrap`, `ConstrainedBox`, daftar prakiraan vertikal/horizontal |
 | Local storage (favorit/riwayat) tampil kembali | ✅ | `local_storage_service.dart` |
 | State management (Provider) | ✅ | `viewmodels/`, `app.dart` |
 | Pencarian kota → cuaca kota terpilih | ✅ | `search_location_screen.dart` |

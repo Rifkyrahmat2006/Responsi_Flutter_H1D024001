@@ -8,10 +8,10 @@ diambil langsung dari **Open-Meteo REST API** (bukan data statis/hardcoded).
 ## Fitur
 
 - **Home / Weather Screen**: nama kota terpilih, kondisi & suhu saat ini, kelembapan, kecepatan angin,
-  peluang hujan, suhu terasa, curah hujan, dan prakiraan harian (7 hari).
+  peluang hujan, suhu terasa, curah hujan, forecast per jam (24 jam), dan prakiraan harian (7 hari).
 - **Search / Location Screen**: input nama kota, daftar hasil pencarian, pilih lokasi untuk melihat cuaca,
   dan simpan lokasi sebagai favorit.
-- Penyimpanan lokal (**SharedPreferences**): lokasi favorit dan lokasi terakhir dipilih, dimuat kembali saat aplikasi dibuka.
+- Penyimpanan lokal (**SharedPreferences**): lokasi favorit, lima pencarian terakhir, dan lokasi terakhir dipilih; data dimuat kembali saat aplikasi dibuka.
 - Penanganan kondisi **loading**, **data kosong**, dan **error** (dengan tombol coba lagi).
 
 ## Pengembangan Fitur Tambahan
