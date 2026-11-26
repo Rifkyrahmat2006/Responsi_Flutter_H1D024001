@@ -90,17 +90,17 @@ flutter test
 ## Screenshot
 
 ### Home / Weather Screen
-<img src="docs/home-weather-screen.png" alt="Home Weather Screen" width="300">
+<img src="assets/screenshots/home-weather-screen.png" alt="Home Weather Screen" width="300">
 
 ### Search / Location Screen — Form Kosong
-<img src="docs/search-empty-screen.jpeg" alt="Search Empty Screen" width="300">
+<img src="assets/screenshots/search-empty-screen.jpeg" alt="Search Empty Screen" width="300">
 
 ### Search / Location Screen — Mencari Kota
-<img src="docs/search-city-searching-screen.jpeg" alt="Search City Searching Screen" width="300">
+<img src="assets/screenshots/search-city-searching-screen.jpeg" alt="Search City Searching Screen" width="300">
 
 ### Search / Location Screen — Favorit Aktif
-<img src="docs/search-city-searching-favorite-screen.jpeg" alt="Search City Searching Favorite Screen" width="300">
+<img src="assets/screenshots/search-city-searching-favorite-screen.jpeg" alt="Search City Searching Favorite Screen" width="300">
 
 ## Video Penjelasan Kode
 
-Link video: _(isi dengan link video penjelasan kode)_
+Link video: https://youtu.be/1E_vXjdBsoE
